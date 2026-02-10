@@ -16,7 +16,7 @@ const eventCategories = [
         description: 'Introduced developers to Sui, why to build on it, and showcased projects within the ecosystem.',
         role: 'Speaker',
         icon: '🎤',
-        gallery: 'https://kikicreatives57.pixieset.com/nightofcode30/',
+        gallery: 'https://photos.google.com/share/AF1QipMaNXjTIsxOdKLCbIamR-ps90C2BYH4wumxbx1FIUsbxDdX39Frlsac3N0F37m2bw?key=dHBxems2NHBTVGoyOXhXcVBHak5sZllxUWF1djhR',
         image: 'https://images.unsplash.com/photo-1558008258-3256797b43f3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0ZWNoJTIwY29tbXVuaXR5JTIwZXZlbnR8ZW58MXx8fHwxNzYwNjIxNDA5fDA&ixlib=rb-4.1.0&q=80&w=1080'
       },
       {
@@ -24,7 +24,7 @@ const eventCategories = [
         description: '1st Night: Walrus Deep Dive | 2nd Night: Intro to Sui Fundamentals — object-centric design, fast consensus, and Move\'s safety model | 3rd Night: ZkLogin Concept Overview',
         role: 'Lead Instructor',
         icon: '👨‍🏫',
-        gallery: 'https://kikicreatives57.pixieset.com/nightofcode30/',
+        gallery: 'https://kikicreatives57.pixieset.com/nightsofcode/',
         image: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb2RpbmclMjB3b3Jrc2hvcHxlbnwxfHx8fDE3NjA2MjE0MDl8MA&ixlib=rb-4.1.0&q=80&w=1080'
       },
       {
@@ -40,7 +40,7 @@ const eventCategories = [
         description: 'Tutored and mentored students on building their developer brand and enhancing non-technical skills for success.',
         role: 'Mentor & Speaker',
         icon: '🧠',
-        gallery: '#',
+        gallery: 'https://drive.google.com/drive/folders/1zuIPFvjbIq5AMFHdB6fI4HJjohLMntk7',
         image: 'https://images.unsplash.com/photo-1565687981296-535f09db714e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkZXZlbG9wZXIlMjBib290Y2FtcHxlbnwxfHx8fDE3NjA2MjE0MTB8MA&ixlib=rb-4.1.0&q=80&w=1080'
       }
     ]
@@ -56,7 +56,7 @@ const eventCategories = [
         description: 'Introduced the Sui community to Full Sail DEX — a DeFi platform built for sustainability and long-term investors.',
         role: 'Organizer & Speaker',
         icon: '🎤',
-        gallery: '#',
+        gallery: 'https://drive.google.com/drive/folders/1zuIPFvjbIq5AMFHdB6fI4HJjohLMntk7',
         image: 'https://images.unsplash.com/photo-1591115765373-5207764f72e7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb21tdW5pdHklMjBtZWV0dXB8ZW58MXx8fHwxNzYwNjIxNDA5fDA&ixlib=rb-4.1.0&q=80&w=1080'
       },
       {
@@ -64,7 +64,7 @@ const eventCategories = [
         description: 'Covered what Sui is, why developers should build on it, and how they can plug into Full Sail DEX.',
         role: 'University Presenter',
         icon: '🎤',
-        gallery: '#',
+        gallery: 'https://drive.google.com/drive/folders/1FL8dk5OGTAWhhKmBJktbDkErS7zNMFbj',
         image: 'https://images.unsplash.com/photo-1583062434105-9bef71509685?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx1bml2ZXJzaXR5JTIwcHJlc2VudGF0aW9ufGVufDF8fHx8MTc2MDYyMTQwOXww&ixlib=rb-4.1.0&q=80&w=1080'
       },
       {
@@ -72,8 +72,8 @@ const eventCategories = [
         description: 'Spoke on "What is Sui?" and "Why Build on It?", introduced Full Sail DEX, and shared insights on building a Web3 career.',
         role: 'Speaker',
         icon: '🎤',
-        gallery: 'https://photos.google.com/share/AF1QipMaNXjTIsxOdKLCbIamR-ps90C2BYH4wumxbx1FIUsbxDdX39Frlsac3N0F37m2bw?key=dHBxems2NHBTVGoyOXhXcVBHak5sZllxUWF1djhR',
-        image: 'https:/images.unsplash.com/photo-1511578314322-379afb476865?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjYXJlZXIlMjBmYWlyfGVufDF8fHx8MTc2MDYyMTQwOXww&ixlib=rb-4.1.0&q=80&w=1080'
+        gallery: 'https://photos.app.goo.gl/3z82whVLPftKJuh58',
+        image: 'https://images.unsplash.com/photo-1511578314322-379afb476865?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjYXJlZXIlMjBmYWlyfGVufDF8fHx8MTc2MDYyMTQwOXww&ixlib=rb-4.1.0&q=80&w=1080'
       }
     ]
   },
@@ -213,7 +213,7 @@ export function CommunitySection() {
                           </div>
 
                           {/* Gallery Link */}
-                          {event.gallery && (
+                          {event.gallery && event.gallery !== '#' && (
                             <a
                               href={event.gallery}
                               target="_blank"
