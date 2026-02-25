@@ -9,10 +9,17 @@ const projects = [
   {
     title: 'Kifaru',
     description: 'A virtual Merchant POS system that allows merchants to receive payment in stablecoins.',
-    image: 'https://res.cloudinary.com/ochanda-portfolio-website/image/upload/v1768377891/Kifaru_merchant_diagram_o0dqsh.png',
+    image: 'https://res.cloudinary.com/ochanda-portfolio-website/image/upload/v1772015709/Screenshot_2026-02-25_132031_txsm8b.png',
     tech: ['TypeScript'],
     github: 'https://github.com/Ochanda-Charles/kifaruSwypt',
     live: 'https://kifaru-swypt.vercel.app/',
+  },
+  {
+    title: 'Event scheduling system backend',
+    description: 'A scalable event scheduling backend. The goal was simple learn how to make a system more scalable',
+    image: 'https://res.cloudinary.com/ochanda-portfolio-website/image/upload/v1772015572/WALRUS_1_efbh7u.png',
+    tech: ['Javascript', 'Node.js', 'Express', 'PostgreSQL','Redis'],
+    github: 'https://github.com/Ochanda-Charles/Event-scheduling-system',
   },
   {
     title: '15 days of Sui Bootcamp',
@@ -20,7 +27,6 @@ const projects = [
     image: 'https://res.cloudinary.com/ochanda-portfolio-website/image/upload/v1768375688/WALRUS_1_mphd5s.png',
     tech: ['Sui Move'],
     github: 'https://github.com/Sui-Community-Network/sui-bootcamp',
-    live: '#',
   }
 ];
 
