@@ -1,6 +1,6 @@
-import { motion, useInView } from 'motion/react';
-import { useRef } from 'react';
-import { ExternalLink, Github } from 'lucide-react';
+import { motion, useInView, AnimatePresence } from 'motion/react';
+import { useRef, useState, useEffect, useCallback, useMemo } from 'react';
+import { ExternalLink, Github, Info } from 'lucide-react';
 import { Card } from './ui/card';
 import { Button } from './ui/button';
 import { ImageWithFallback } from './figma/ImageWithFallback';
@@ -18,7 +18,7 @@ const projects = [
     title: 'Event scheduling system backend',
     description: 'A scalable event scheduling backend. The goal was simple learn how to make a system more scalable',
     image: 'https://res.cloudinary.com/ochanda-portfolio-website/image/upload/v1772015572/WALRUS_1_efbh7u.png',
-    tech: ['Javascript', 'Node.js', 'Express', 'PostgreSQL','Redis'],
+    tech: ['Javascript', 'Node.js', 'Express', 'PostgreSQL', 'Redis'],
     github: 'https://github.com/Ochanda-Charles/Event-scheduling-system',
   },
   {
@@ -33,9 +33,55 @@ const projects = [
 export function ProjectsSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
+  const [toast, setToast] = useState<string | null>(null);
+
+  const [isDark, setIsDark] = useState(() =>
+    document.documentElement.classList.contains('dark')
+  );
+
+  useEffect(() => {
+    const observer = new MutationObserver(() => {
+      setIsDark(document.documentElement.classList.contains('dark'));
+    });
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    return () => observer.disconnect();
+  }, []);
+
+  const showToast = useCallback((projectTitle: string) => {
+    setToast(`${projectTitle} is a backend project — no live preview available. Check out the code instead!`);
+  }, []);
+
+  useEffect(() => {
+    if (toast) {
+      const timer = setTimeout(() => setToast(null), 3500);
+      return () => clearTimeout(timer);
+    }
+  }, [toast]);
+
+  const toastStyles = useMemo(() => ({
+    container: {
+      display: 'flex' as const,
+      alignItems: 'center' as const,
+      gap: '0.75rem',
+      padding: '0.875rem 1.25rem',
+      borderRadius: '0.75rem',
+      backgroundColor: isDark ? '#1f1f1f' : '#ffffff',
+      color: isDark ? '#ffffff' : '#111827',
+      boxShadow: isDark
+        ? '0 10px 15px -3px rgba(0,0,0,0.3)'
+        : '0 10px 25px -5px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.05)',
+      border: '1px solid rgba(255, 122, 89, 0.3)',
+    },
+    text: {
+      fontSize: '0.875rem',
+      lineHeight: '1.625',
+      color: isDark ? '#ffffff' : '#111827',
+      margin: 0,
+    },
+  }), [isDark]);
 
   return (
-    <section id="projects" className="min-h-screen bg-[#F9FAFB] dark:bg-black py-24 px-6">
+    <section id="projects" className="relative min-h-screen bg-[#F9FAFB] dark:bg-black py-24 px-6">
       <div className="max-w-7xl mx-auto">
         <motion.div
           ref={ref}
@@ -91,16 +137,27 @@ export function ProjectsSection() {
                         Code
                       </a>
                     </Button>
-                    <Button
-                      size="sm"
-                      className="flex-1 bg-[#FF7A59] text-white hover:bg-[#2563EB]"
-                      asChild
-                    >
-                      <a href={project.live} target="_blank" rel="noopener noreferrer">
+                    {project.live ? (
+                      <Button
+                        size="sm"
+                        className="flex-1 bg-[#FF7A59] text-white hover:bg-[#2563EB]"
+                        asChild
+                      >
+                        <a href={project.live} target="_blank" rel="noopener noreferrer">
+                          <ExternalLink className="w-4 h-4 mr-2" />
+                          View
+                        </a>
+                      </Button>
+                    ) : (
+                      <Button
+                        size="sm"
+                        className="flex-1 bg-[#FF7A59] text-white hover:bg-[#2563EB]"
+                        onClick={() => showToast(project.title)}
+                      >
                         <ExternalLink className="w-4 h-4 mr-2" />
                         View
-                      </a>
-                    </Button>
+                      </Button>
+                    )}
                   </div>
                 </div>
               </Card>
@@ -108,6 +165,24 @@ export function ProjectsSection() {
           ))}
         </div>
       </div>
+
+      {/* Gentle toast notification */}
+      <AnimatePresence>
+        {toast && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 10 }}
+            transition={{ duration: 0.35, ease: 'easeOut' }}
+            className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 max-w-md w-[90%]"
+          >
+            <div style={toastStyles.container}>
+              <Info className="w-5 h-5 shrink-0" style={{ color: '#FF7A59' }} />
+              <p style={toastStyles.text}>{toast}</p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

@@ -9,7 +9,7 @@ const skills = [
     iconColor: '#FF7A59',
     bgColor: 'rgba(255, 122, 89, 0.1)',
     caption: 'Where I build',
-    items: ['Solidity', 'Sui Move', 'React','NextJS', 'TypeScript', 'NodeJS','ExpressJS','UX Design', 'System Design'],
+    items: ['Solidity', 'Sui Move', 'React', 'NextJS', 'TypeScript', 'NodeJS', 'ExpressJS', 'UX Design', 'System Design'],
   },
   {
     category: 'Marketing Skills',
@@ -64,8 +64,8 @@ export function SkillsSection() {
                   className="w-16 h-16 rounded-full flex items-center justify-center mx-auto"
                   style={{ backgroundColor: skillSet.bgColor }}
                 >
-                  <skillSet.icon 
-                    className="w-8 h-8" 
+                  <skillSet.icon
+                    className="w-8 h-8"
                     style={{ color: skillSet.iconColor }}
                     strokeWidth={1.5}
                   />
