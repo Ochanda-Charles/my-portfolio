@@ -24,6 +24,14 @@ const MediumIcon = () => (
 
 const content = [
   {
+    title: 'Sui the Internet\'s Ikigai',
+    platform: 'X',
+    icon: XIcon,
+    summary: 'Why Sui is the perfect blend of scalability, security,simplicity and decentralization',
+    image: 'https://res.cloudinary.com/ochanda-portfolio-website/image/upload/v1772014472/sui-venn-v2_feclvr.png',
+    link: 'https://x.com/0x_Ochanda/status/2025059096655790308',
+  },
+  {
     title: 'Buybacks',
     platform: 'X',
     icon: XIcon,
