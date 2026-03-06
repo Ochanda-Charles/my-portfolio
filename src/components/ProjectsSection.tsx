@@ -10,14 +10,16 @@ const projects = [
     title: 'Kifaru',
     description: 'A virtual Merchant POS system that allows merchants to receive payment in stablecoins.',
     image: 'https://res.cloudinary.com/ochanda-portfolio-website/image/upload/v1772015709/Screenshot_2026-02-25_132031_txsm8b.png',
+    alt: 'Screenshot of the Kifaru Virtual POS dashboard showing merchant transactions in stablecoins',
     tech: ['TypeScript'],
-    github: 'https://github.com/Ochanda-Charles/kifaruSwypt',
-    live: 'https://kifaru-swypt.vercel.app/',
+    github: 'https://github.com/Ochanda-Charles/Kifaru-V2',
+    live: 'https://kifaru-virtual-pos.vercel.app/',
   },
   {
     title: 'Event scheduling system backend',
     description: 'A scalable event scheduling backend. The goal was simple learn how to make a system more scalable',
     image: 'https://res.cloudinary.com/ochanda-portfolio-website/image/upload/v1772015572/WALRUS_1_efbh7u.png',
+    alt: 'Terminal output showing logs from the event scheduling system testing and performance metrics',
     tech: ['Javascript', 'Node.js', 'Express', 'PostgreSQL', 'Redis'],
     github: 'https://github.com/Ochanda-Charles/Event-scheduling-system',
   },
@@ -25,6 +27,7 @@ const projects = [
     title: '15 days of Sui Bootcamp',
     description: 'A beginner-friendly bootcamp that guides developers through Sui Move fundamentals using hands-on smart contract examples.',
     image: 'https://res.cloudinary.com/ochanda-portfolio-website/image/upload/v1768375688/WALRUS_1_mphd5s.png',
+    alt: 'Promotional cover banner for the 15 days of Sui Bootcamp showing blockchain smart contract development',
     tech: ['Sui Move'],
     github: 'https://github.com/Sui-Community-Network/sui-bootcamp',
   }
@@ -108,7 +111,8 @@ export function ProjectsSection() {
                 <div className="aspect-video overflow-hidden">
                   <ImageWithFallback
                     src={project.image}
-                    alt={project.title}
+                    alt={project.alt}
+                    loading="lazy"
                     className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                   />
                 </div>
@@ -132,8 +136,8 @@ export function ProjectsSection() {
                       className="flex-1 border-[#111827] dark:border-[#2a2a2a] text-[#111827] dark:text-white hover:bg-[#111827] dark:hover:bg-white hover:text-white dark:hover:text-black"
                       asChild
                     >
-                      <a href={project.github} target="_blank" rel="noopener noreferrer">
-                        <Github className="w-4 h-4 mr-2" />
+                      <a href={project.github} target="_blank" rel="noopener noreferrer" aria-label={`View source code for ${project.title} on GitHub`}>
+                        <Github className="w-4 h-4 mr-2" aria-hidden="true" />
                         Code
                       </a>
                     </Button>
@@ -143,8 +147,8 @@ export function ProjectsSection() {
                         className="flex-1 bg-[#FF7A59] text-white hover:bg-[#2563EB]"
                         asChild
                       >
-                        <a href={project.live} target="_blank" rel="noopener noreferrer">
-                          <ExternalLink className="w-4 h-4 mr-2" />
+                        <a href={project.live} target="_blank" rel="noopener noreferrer" aria-label={`View live deployment of ${project.title}`}>
+                          <ExternalLink className="w-4 h-4 mr-2" aria-hidden="true" />
                           View
                         </a>
                       </Button>
@@ -153,8 +157,9 @@ export function ProjectsSection() {
                         size="sm"
                         className="flex-1 bg-[#FF7A59] text-white hover:bg-[#2563EB]"
                         onClick={() => showToast(project.title)}
+                        aria-label={`View details for ${project.title}`}
                       >
-                        <ExternalLink className="w-4 h-4 mr-2" />
+                        <ExternalLink className="w-4 h-4 mr-2" aria-hidden="true" />
                         View
                       </Button>
                     )}
