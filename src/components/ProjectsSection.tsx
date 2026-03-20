@@ -21,7 +21,7 @@ const projects = [
     description: 'A virtual Merchant POS system that allows merchants to receive payment in stablecoins.',
     image: 'https://res.cloudinary.com/ochanda-portfolio-website/image/upload/v1772015709/Screenshot_2026-02-25_132031_txsm8b.png',
     alt: 'Screenshot of the Kifaru Virtual POS dashboard showing merchant transactions in stablecoins',
-    tech: ['TypeScript'],
+    tech: ['TypeScript','Node.js', 'Express', 'PostgreSQL', 'Fonbnk API'],
     github: 'https://github.com/Ochanda-Charles/Kifaru-V2',
     live: 'https://kifaru-virtual-pos.vercel.app/',
   },
