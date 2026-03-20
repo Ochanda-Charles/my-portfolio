@@ -7,6 +7,16 @@ import { ImageWithFallback } from './figma/ImageWithFallback';
 
 const projects = [
   {
+  title: 'Ultrashine V2',
+  description: 'A redesigned automotive detailing website with AI-powered vehicle previews, Sanity CMS, and 10 Gemini-powered modification services.',
+  image: 'https://res.cloudinary.com/ochanda-portfolio-website/image/upload/v1773984168/Screenshot_2026-03-20_082055_i0k151.png',
+  alt: 'Screenshot of the Ultrashine V2 homepage showcasing AI vehicle preview and premium auto detailing services',
+  tech: ['TypeScript', 'Next.js', 'Sanity', 'Gemini AI'],
+  github: 'https://github.com/Ochanda-Charles/Ultrashine-redesign',
+  live: 'https://ultrashine-redesign.vercel.app/',
+  privateRepo: true,
+},
+  {
     title: 'Kifaru',
     description: 'A virtual Merchant POS system that allows merchants to receive payment in stablecoins.',
     image: 'https://res.cloudinary.com/ochanda-portfolio-website/image/upload/v1772015709/Screenshot_2026-02-25_132031_txsm8b.png',
@@ -50,8 +60,8 @@ export function ProjectsSection() {
     return () => observer.disconnect();
   }, []);
 
-  const showToast = useCallback((projectTitle: string) => {
-    setToast(`${projectTitle} is a backend project — no live preview available. Check out the code instead!`);
+  const showToast = useCallback((message: string) => {
+    setToast(message);
   }, []);
 
   useEffect(() => {
@@ -130,17 +140,30 @@ export function ProjectsSection() {
                     ))}
                   </div>
                   <div className="flex gap-3">
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="flex-1 border-[#111827] dark:border-[#2a2a2a] text-[#111827] dark:text-white hover:bg-[#111827] dark:hover:bg-white hover:text-white dark:hover:text-black"
-                      asChild
-                    >
-                      <a href={project.github} target="_blank" rel="noopener noreferrer" aria-label={`View source code for ${project.title} on GitHub`}>
+                    {project.privateRepo ? (
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="flex-1 border-[#111827] dark:border-[#2a2a2a] text-[#111827] dark:text-white hover:bg-[#111827] dark:hover:bg-white hover:text-white dark:hover:text-black"
+                        onClick={() => showToast(`${project.title}'s GitHub repo is private for client protection purposes. You can view the live preview using the Vercel link instead!`)}
+                        aria-label={`View source code for ${project.title} on GitHub`}
+                      >
                         <Github className="w-4 h-4 mr-2" aria-hidden="true" />
                         Code
-                      </a>
-                    </Button>
+                      </Button>
+                    ) : (
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="flex-1 border-[#111827] dark:border-[#2a2a2a] text-[#111827] dark:text-white hover:bg-[#111827] dark:hover:bg-white hover:text-white dark:hover:text-black"
+                        asChild
+                      >
+                        <a href={project.github} target="_blank" rel="noopener noreferrer" aria-label={`View source code for ${project.title} on GitHub`}>
+                          <Github className="w-4 h-4 mr-2" aria-hidden="true" />
+                          Code
+                        </a>
+                      </Button>
+                    )}
                     {project.live ? (
                       <Button
                         size="sm"
@@ -156,7 +179,7 @@ export function ProjectsSection() {
                       <Button
                         size="sm"
                         className="flex-1 bg-[#FF7A59] text-white hover:bg-[#2563EB]"
-                        onClick={() => showToast(project.title)}
+                        onClick={() => showToast(`${project.title} is a backend project — no live preview available. Check out the code instead!`)}
                         aria-label={`View details for ${project.title}`}
                       >
                         <ExternalLink className="w-4 h-4 mr-2" aria-hidden="true" />
