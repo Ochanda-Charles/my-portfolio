@@ -1,21 +1,41 @@
 import { motion, useInView, AnimatePresence } from 'motion/react';
 import { useRef, useState, useEffect, useCallback, useMemo } from 'react';
-import { ExternalLink, Github, Info } from 'lucide-react';
+import { ExternalLink, Github, Info, Play, X, Maximize2 } from 'lucide-react';
 import { Card } from './ui/card';
 import { Button } from './ui/button';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 
-const projects = [
+interface Project {
+  title: string;
+  description: string;
+  image?: string;
+  youtubeId?: string;
+  alt: string;
+  tech: string[];
+  github: string;
+  live?: string;
+  privateRepo?: boolean;
+}
+
+const projects: Project[] = [
   {
-  title: 'Ultrashine V2',
-  description: 'A redesigned automotive detailing website with AI-powered vehicle previews, Sanity CMS, and 10 Gemini-powered modification services.',
-  image: 'https://res.cloudinary.com/ochanda-portfolio-website/image/upload/v1773984168/Screenshot_2026-03-20_082055_i0k151.png',
-  alt: 'Screenshot of the Ultrashine V2 homepage showcasing AI vehicle preview and premium auto detailing services',
-  tech: ['TypeScript', 'Next.js', 'Sanity', 'Gemini AI'],
-  github: 'https://github.com/Ochanda-Charles/Ultrashine-redesign',
-  live: 'https://ultrashine-redesign.vercel.app/',
-  privateRepo: true,
-},
+    title: 'NeuroContent',
+    description: 'An AI-powered brain activity prediction platform for content creators. Analyzes videos to predict neural responses with interactive 3D brain visualizations and AI coaching.',
+    youtubeId: 'YjyIUzACaT0',
+    alt: 'Demo video of the NeuroContent platform showing 3D brain activity visualization with neural engagement heatmap',
+    tech: ['Next.js', 'Python', 'FastAPI', 'Three.js', 'PyTorch', 'Claude AI'],
+    github: 'https://github.com/Ochanda-Charles/Neurocontent',
+  },
+  {
+    title: 'Ultrashine V2',
+    description: 'A redesigned automotive detailing website with AI-powered vehicle previews, Sanity CMS, and 10 Gemini-powered modification services.',
+    image: 'https://res.cloudinary.com/ochanda-portfolio-website/image/upload/v1773984168/Screenshot_2026-03-20_082055_i0k151.png',
+    alt: 'Screenshot of the Ultrashine V2 homepage showcasing AI vehicle preview and premium auto detailing services',
+    tech: ['TypeScript', 'Next.js', 'Sanity', 'Gemini AI'],
+    github: 'https://github.com/Ochanda-Charles/Ultrashine-redesign',
+    live: 'https://ultrashine-redesign.vercel.app/',
+    privateRepo: true,
+  },
   {
     title: 'Kifaru',
     description: 'A virtual Merchant POS system that allows merchants to receive payment in stablecoins.',
@@ -43,10 +63,64 @@ const projects = [
   }
 ];
 
+function YouTubeFullscreen({ youtubeId, title, onClose }: { youtubeId: string; title: string; onClose: () => void }) {
+  const overlayRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    document.addEventListener('keydown', handleEsc);
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.removeEventListener('keydown', handleEsc);
+      document.body.style.overflow = '';
+    };
+  }, [onClose]);
+
+  return (
+    <motion.div
+      ref={overlayRef}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.3 }}
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-sm"
+      onClick={(e) => { if (e.target === overlayRef.current) onClose(); }}
+    >
+      <motion.div
+        initial={{ scale: 0.85, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.9, opacity: 0 }}
+        transition={{ duration: 0.3, ease: 'easeOut' }}
+        style={{ width: '92vw', height: '75vh', position: 'relative' }}
+      >
+        <button
+          onClick={onClose}
+          style={{ position: 'absolute', top: '-3rem', right: 0, zIndex: 10, display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'rgba(255,255,255,0.7)', background: 'none', border: 'none', cursor: 'pointer' }}
+          aria-label="Close video"
+        >
+          <span style={{ fontSize: '0.875rem', fontWeight: 500 }}>{title}</span>
+          <X className="w-6 h-6" />
+        </button>
+        <iframe
+          src={`https://www.youtube.com/embed/${youtubeId}?autoplay=1&rel=0`}
+          title={`Demo video for ${title}`}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          frameBorder={0}
+          style={{ width: '100%', height: '100%', borderRadius: '0.5rem' }}
+        />
+      </motion.div>
+    </motion.div>
+  );
+}
+
 export function ProjectsSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
   const [toast, setToast] = useState<string | null>(null);
+  const [fullscreenVideo, setFullscreenVideo] = useState<{ youtubeId: string; title: string } | null>(null);
 
   const [isDark, setIsDark] = useState(() =>
     document.documentElement.classList.contains('dark')
@@ -118,14 +192,42 @@ export function ProjectsSection() {
               transition={{ duration: 0.6, delay: index * 0.1 }}
             >
               <Card className="overflow-hidden border-2 border-transparent hover:border-[#FF7A59] transition-all duration-300 h-full flex flex-col">
-                <div className="aspect-video overflow-hidden">
-                  <ImageWithFallback
-                    src={project.image}
-                    alt={project.alt}
-                    loading="lazy"
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
+                {project.youtubeId ? (
+                  <div
+                    className="aspect-video overflow-hidden relative group cursor-pointer"
+                    onClick={() => setFullscreenVideo({ youtubeId: project.youtubeId!, title: project.title })}
+                  >
+                    <img
+                      src={`https://img.youtube.com/vi/${project.youtubeId}/maxresdefault.jpg`}
+                      alt={project.alt}
+                      loading="lazy"
+                      className="w-full h-full object-cover"
+                    />
+                    {/* Play / expand overlay */}
+                    <div className="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition-all duration-300 flex items-center justify-center">
+                      <div className="flex items-center gap-3">
+                        <div className="w-14 h-14 rounded-full bg-[#FF7A59] flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                          <Play className="w-6 h-6 text-white ml-0.5" fill="white" />
+                        </div>
+                        <Maximize2 className="w-5 h-5 text-white absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                      </div>
+                    </div>
+                    {/* Video badge */}
+                    <div className="absolute top-3 left-3 px-2 py-1 bg-black/60 backdrop-blur-sm rounded-md flex items-center gap-1.5">
+                      <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
+                      <span className="text-white text-xs font-medium">Demo</span>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="aspect-video overflow-hidden">
+                    <ImageWithFallback
+                      src={project.image!}
+                      alt={project.alt}
+                      loading="lazy"
+                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                )}
                 <div className="p-6 flex-1 flex flex-col">
                   <h3 className="text-[#111827] dark:text-white mb-3">{project.title}</h3>
                   <p className="text-[#111827] dark:text-white opacity-70 mb-4 flex-1">{project.description}</p>
@@ -175,6 +277,16 @@ export function ProjectsSection() {
                           View
                         </a>
                       </Button>
+                    ) : project.youtubeId ? (
+                      <Button
+                        size="sm"
+                        className="flex-1 bg-[#FF7A59] text-white hover:bg-[#2563EB]"
+                        onClick={() => setFullscreenVideo({ youtubeId: project.youtubeId!, title: project.title })}
+                        aria-label={`Watch demo video for ${project.title}`}
+                      >
+                        <Play className="w-4 h-4 mr-2" aria-hidden="true" />
+                        Demo
+                      </Button>
                     ) : (
                       <Button
                         size="sm"
@@ -193,6 +305,17 @@ export function ProjectsSection() {
           ))}
         </div>
       </div>
+
+      {/* Fullscreen YouTube modal */}
+      <AnimatePresence>
+        {fullscreenVideo && (
+          <YouTubeFullscreen
+            youtubeId={fullscreenVideo.youtubeId}
+            title={fullscreenVideo.title}
+            onClose={() => setFullscreenVideo(null)}
+          />
+        )}
+      </AnimatePresence>
 
       {/* Gentle toast notification */}
       <AnimatePresence>
