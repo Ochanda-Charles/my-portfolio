@@ -22,7 +22,23 @@ const MediumIcon = () => (
   </svg>
 );
 
+const YouTubeIcon = () => (
+  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z" />
+    <path d="M9.545 15.568V8.432L15.818 12l-6.273 3.568z" fill="#fff" />
+  </svg>
+);
+
 const content = [
+  {
+    title: 'How Blockchain Works Beyond Crypto Trading',
+    platform: 'YouTube',
+    icon: YouTubeIcon,
+    summary: 'A podcast diving into blockchain technology beyond trading — real-world applications, industry insights, and the future of decentralized systems.',
+    image: 'https://img.youtube.com/vi/rLQ7pI13UCI/maxresdefault.jpg',
+    link: 'https://youtu.be/rLQ7pI13UCI',
+    cta: 'Watch Podcast',
+  },
   {
     title: 'Sui the Internet\'s Ikigai',
     platform: 'X',
@@ -127,7 +143,7 @@ export function ContentSection() {
                     </h3>
                     <p className="text-[#111827] dark:text-white opacity-70 mb-4">{item.summary}</p>
                     <span className="inline-flex items-center gap-2 text-[#2563EB]">
-                      Read Post
+                      {item.cta || 'Read Post'}
                       <ExternalLink className="w-4 h-4" />
                     </span>
                   </div>
