@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://my-portfolio-indol-six-81.vercel.app/sitemap.xml
+Sitemap: https://ochanda-charles.me/sitemap.xml
